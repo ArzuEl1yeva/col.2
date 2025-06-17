@@ -1,19 +1,12 @@
-from itertools import combinations
-
 def alternate(s):
-    unique_chars = set(s)
+    unique_chars = list(set(s))
     max_length = 0
 
-    for a, b in combinations(unique_chars, 2):
-        filtered = [c for c in s if c == a or c == b]
-
-        valid = True
-        for i in range(1, len(filtered)):
-            if filtered[i] == filtered[i - 1]:
-                valid = False
-                break
-
-        if valid:
-            max_length = max(max_length, len(filtered))
+    for i in range(len(unique_chars)):
+        for j in range(i + 1, len(unique_chars)):
+            filtered = [c for c in s if c == unique_chars[i] or c == unique_chars[j]]
+            
+            if all(filtered[k] != filtered[k+1] for k in range(len(filtered) - 1)):
+                max_length = max(max_length, len(filtered))
 
     return max_length
