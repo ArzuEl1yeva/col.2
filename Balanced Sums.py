@@ -1,10 +1,14 @@
 def balancedSums(arr):
-    total_sum = sum(arr)
+    total = 0
+    for num in arr:
+        total += num
+
     left_sum = 0
 
-    for num in arr:
-        if left_sum == total_sum - left_sum - num:
+    for i in range(len(arr)):
+        right_sum = total - left_sum - arr[i]
+        if left_sum == right_sum:
             return "YES"
-        left_sum += num
+        left_sum += arr[i]
 
     return "NO"
